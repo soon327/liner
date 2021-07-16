@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 import Button from './Button';
-import { ReactComponent as NotificationSvg } from '/images/noti.svg';
 
 export default function Header() {
   return (
@@ -35,7 +34,6 @@ const LOGO_BOX = styled.div`
 `;
 const LOGO = styled.a`
   position: absolute;
-  left: 40px;
   width: 32px;
   height: 32px;
   border-radius: 8px;
@@ -57,6 +55,5 @@ const RIGHT = styled.div`
 `;
 
 const NOTIFICATION_BTN = styled(Button)`
-  margin-right: 40px;
   margin-left: 20px;
 `;

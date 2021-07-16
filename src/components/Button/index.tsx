@@ -39,7 +39,7 @@ const BUTTON = styled.button<{ icon: string | null }>`
       background-position: 50%;
       border-radius: 50%;
       :hover {
-        background-color: ${({ theme }) => theme.colors.hover_grey};
+        background-color: ${({ theme }) => (icon === '/images/search.svg' ? theme.colors.hover_darkgrey : theme.colors.hover_grey)};
       }
     `}
 `;

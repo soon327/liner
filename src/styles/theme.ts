@@ -9,7 +9,8 @@ const colors = {
   tab_title_grey: '#969aa2',
   img_mint: '#33cac6',
   background_grey: '#eef1f4',
-  hover_grey: '#dde1e7',
+  hover_grey: '#f6f8fa',
+  hover_darkgrey: '#dde1e7',
   hover_mint: '#00bdb8',
   placeholder: '#b7b8bb',
 };

@@ -13,15 +13,18 @@ function App(): JSX.Element {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        <CONTAINER className="App">
-          <Header />
-          <MenuBar />
-          <Switch>
-            <Route path="/home" component={HomePage} />
-            <Route path="/highlights" component={HighlightsPage} />
-            <Redirect path="*" to="/home" />
-          </Switch>
-        </CONTAINER>
+        <div className="App">
+          <CONTAINER>
+            <Header />
+            <MenuBar />
+            <Switch>
+              <Route path="/home" component={HomePage} />
+              <Route path="/myhighlights/highlights" component={HighlightsPage} />
+              <Route path="/more" component={HomePage} />
+              <Redirect path="*" to="/home" />
+            </Switch>
+          </CONTAINER>
+        </div>
       </Router>
     </ThemeProvider>
   );

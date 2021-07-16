@@ -1,6 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as SearchSvg } from '../../images/search.svg';
 import Button from '../Button';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
