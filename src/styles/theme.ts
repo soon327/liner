@@ -7,9 +7,11 @@ const colors = {
   text_mint: '#00bdb8',
   tab_title_black: '#52565d',
   tab_title_grey: '#969aa2',
-  img_mint: '#00e2b7',
+  img_mint: '#33cac6',
   background_grey: '#eef1f4',
   hover_grey: '#dde1e7',
+  hover_mint: '#00bdb8',
+  placeholder: '#b7b8bb',
 };
 
 const pixelToRem = (size: number) => `${size / ROOT_FONT_SIZE}rem`;
