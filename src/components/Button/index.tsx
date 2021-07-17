@@ -1,11 +1,16 @@
-import React, { ButtonHTMLAttributes, FunctionComponent, ReactElement } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: 'notification' | 'search';
+  icon?: 'notification' | 'search' | 'close' | 'info';
 }
 
-const iconURL = { notification: '/images/notification.svg', search: '/images/search.svg', close: '/images/close.svg' };
+const iconURL = {
+  notification: '/images/notification.svg',
+  search: '/images/search.svg',
+  close: '/images/close.svg',
+  info: '/images/information.svg',
+};
 
 export default function Button({ icon, ...props }: Props): JSX.Element {
   return (

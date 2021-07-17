@@ -23,7 +23,6 @@ const HEADER = styled.header`
   top: 0;
   width: 1280px;
   height: 64px;
-  border: 1px solid;
   display: flex;
   align-items: center;
 `;
