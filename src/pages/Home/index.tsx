@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Aside from '../../components/Aside';
 import Title from './sections/Title';
+import { trendingData } from '../../data';
 
 export default function HomePage() {
   return (
     <CONTAINER>
       <Title />
-      <Aside />
+      <Aside data={trendingData}>Trending</Aside>
     </CONTAINER>
   );
 }
