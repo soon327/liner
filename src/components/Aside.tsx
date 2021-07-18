@@ -23,9 +23,9 @@ export default function Aside({ data, ...props }: Props) {
         <LIST>
           {data.pages.map((page, idx) => (
             <PAGE key={idx} href={page.href}>
-              {page.tagList.length !== 0 && (
+              {page.tagList?.length !== 0 && (
                 <TAG_LIST>
-                  {page.tagList.map((tag, idx) => (
+                  {page.tagList?.map((tag, idx) => (
                     <TAG_PAGE key={idx}>#{tag}</TAG_PAGE>
                   ))}
                 </TAG_LIST>

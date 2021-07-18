@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import { CONTAINER, CONTENTS } from '../Home';
 import PageList from '../Home/sections/PageList';
 import Aside from '../../components/Aside';
-import { trendingData, relevantData } from '../../data';
+import { trendingData, relevantData, PageData } from '../../data';
 import DetailHeader from './sections/DetailHeader';
 import DetailContents from './sections/DetailContents';
-import { PageData } from '../../data';
 
 export default function DetailPage({ location }: RouteComponentProps<{}, {}, PageData>) {
   const { pathname } = useLocation();
@@ -22,12 +21,12 @@ export default function DetailPage({ location }: RouteComponentProps<{}, {}, Pag
         {pathname === '/home/pages' && (
           <>
             <RELEVANT_HEADER>More Like This</RELEVANT_HEADER>
-            <PageList />
+            <PageList data={relevantData.pages} />
           </>
         )}
       </CONTENTS>
-      {pathname === '/home/pages' && <Aside data={trendingData}>Trending</Aside>}
-      {pathname === '/myhighlights/pages' && <Aside data={relevantData}>Relevant</Aside>}
+      {pathname === '/home/pages' && <Aside data={relevantData}>Relevant</Aside>}
+      {pathname === '/myhighlights/pages' && <Aside data={trendingData}>Trending</Aside>}
     </CONTAINER>
   );
 }

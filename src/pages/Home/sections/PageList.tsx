@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import OptionsBtn from '../../../components/Button/OptionsBtn';
-import { foryouData, PageData, pageListMoreData } from '../../../data';
+import { PageData } from '../../../data';
+import { useInfiniteScroll } from '../../../utils/useInfiniteScroll';
 import Button from '../../../components/Button';
 
-export default function PageList() {
+interface Props {
+  data: PageData[];
+}
+
+export default function PageList({ data }: Props) {
   const history = useHistory();
   const [bookmarked, setBookmarked] = useState<number[]>([]);
   const [showMore, setShowMore] = useState(false);
+  const [limit, setLimit] = useState(5);
 
   const handleClickTitle = (data: PageData) => {
     history.push(`/home/pages?access=recommend$index=${data.index}&url=${data.href}`, data);
+    window.scrollTo(0, 0);
   };
 
   // 북마크 클릭 시 상태 업데이트하여 북마크이미지 변화
@@ -23,10 +30,24 @@ export default function PageList() {
     }
   };
 
+  const onIntersect: IntersectionObserverCallback = useCallback(
+    ([{ isIntersecting, target }], observer) => {
+      if (isIntersecting) {
+        setLimit((limit: number) => limit + 5);
+        observer.unobserve(target);
+        console.log('dfawefefaefw');
+      }
+    },
+    [setLimit]
+  );
+
+  const [setTarget] = useInfiniteScroll(onIntersect);
+  const landingData = useMemo(() => data.slice(0, limit), [data, limit]);
+
   return (
     <section>
-      {foryouData.map((data) => (
-        <PAGE_CONTAINER key={data.index}>
+      {landingData.map((data) => (
+        <PAGE_CONTAINER key={data.index} ref={data.index === landingData.length - 1 ? setTarget : null}>
           {data.tagList && (
             <TAG_CONTAINER>
               {data.tagList.map((tag, idx) => (

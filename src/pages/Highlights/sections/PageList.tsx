@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { highlightsData, PageData } from '../../../data';
+import { useInfiniteScroll } from '../../../utils/useInfiniteScroll';
+import { PageData } from '../../../data';
 import Button from '../../../components/Button';
 
 import {
@@ -17,17 +18,36 @@ import {
   BUTTON_CONTAINER,
 } from '../../Home/sections/PageList';
 
-export default function PageList() {
+interface Props {
+  data: PageData[];
+}
+export default function PageList({ data }: Props) {
   const history = useHistory();
+  const [limit, setLimit] = useState(5);
 
   const handleClickTitle = (data: PageData) => {
     history.push(`/myhighlights/pages?type=my_highlights$index=${data.index}&url=${data.href}`, data);
+    window.scrollTo(0, 0);
   };
+
+  const onIntersect: IntersectionObserverCallback = useCallback(
+    ([{ isIntersecting, target }], observer) => {
+      if (isIntersecting) {
+        setLimit((limit: number) => limit + 5);
+        observer.unobserve(target);
+        console.log('dfawefefaefw');
+      }
+    },
+    [setLimit]
+  );
+
+  const [setTarget] = useInfiniteScroll(onIntersect);
+  const landingData = useMemo(() => data.slice(0, limit), [data, limit]);
 
   return (
     <section>
-      {highlightsData.map((data) => (
-        <PAGE_CONTAINER>
+      {landingData.map((data) => (
+        <PAGE_CONTAINER key={data.index} ref={data.index === landingData.length - 1 ? setTarget : null}>
           <CONTENTS_CONTAINER>
             <CONTENTS>
               <CONTENTS_TITLE_CONTAINER>

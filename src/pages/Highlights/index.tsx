@@ -5,7 +5,7 @@ import Aside from '../../components/Aside';
 import Title from '../../components/Title';
 import ConfigurationBar from './sections/ConfigurationBar';
 import PageList from './sections/PageList';
-import { trendingData } from '../../data';
+import { highlightsData, trendingData } from '../../data';
 
 export default function HighlightsPage() {
   const [clickedInput, setClickedInput] = useState(false);
@@ -22,7 +22,7 @@ export default function HighlightsPage() {
           showOptions={showOptions}
           setShowOptions={setShowOptions}
         />
-        <PageList />
+        <PageList data={highlightsData} />
       </CONTENTS>
       <Aside data={trendingData}>Trending</Aside>
     </CONTAINER>
