@@ -9,7 +9,7 @@ export default function Header() {
       <LOGO_BOX>
         <LOGO href="/home" />
       </LOGO_BOX>
-      <SEARCH icon="search" placeholder="Search on LINER" />
+      <SEARCH icon="search" width="680px" placeholder="Search on LINER" />
       <RIGHT>
         <Button>Upgrade</Button>
         <NOTIFICATION_BTN icon="notification" />

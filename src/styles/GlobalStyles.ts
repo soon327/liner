@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
     a{
       text-decoration:none;
       color:inherit;
+      cursor: pointer;
     }
     *{
       box-sizing:border-box;

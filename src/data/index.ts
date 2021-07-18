@@ -17,6 +17,10 @@ export interface Data {
   pages: Page[];
 }
 
+export const languages = { title: 'Select for feed', data: ['English', '한국어', '简体字', '繁體字', '日本語', 'Others'] };
+
+export const searchOptions = { title: 'Search Option', data: ['Title', 'URL', 'Highlight', 'Description', 'Comment'] };
+
 export const trendingData: Data = {
   keywords: [
     'sharing',
