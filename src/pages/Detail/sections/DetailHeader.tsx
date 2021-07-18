@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../../components/Button';
+import SharetModal from '../../../components/Modal/ShareModal';
+import ButtonContainer from '../../../pages/Home/sections/ButtonContainer';
 
-export default function DetailHeader() {
+interface Props {
+  dataIdx: number;
+}
+export default function DetailHeader({ dataIdx }: Props) {
   const history = useHistory();
-  console.log(history);
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <HEADER>
+      <SharetModal openModal={openModal} setOpenModal={setOpenModal} />
       <Button icon="back" onClick={() => history.goBack()} />
-      <BUTTON_CONTAINER>
-        <Button icon="bookmark" />
-        <Button icon="share" />
-        <Button icon="more" />
-      </BUTTON_CONTAINER>
+      <ButtonContainer dataIdx={dataIdx} openModal={openModal} setOpenModal={setOpenModal} />
     </HEADER>
   );
 }

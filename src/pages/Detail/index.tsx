@@ -13,7 +13,7 @@ export default function DetailPage({ location }: RouteComponentProps<{}, {}, Pag
   return (
     <CONTAINER>
       <CONTENTS>
-        <DetailHeader />
+        <DetailHeader dataIdx={location.state.index} />
         <DetailContents data={location.state} />
         <VIEW_ORIGINAL href={location.state.href} target="_blank" rel="noreferrer">
           View Original

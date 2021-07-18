@@ -1,11 +1,10 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import OptionsBtn from '../../../components/Button/OptionsBtn';
-import { PageData, pageListMoreData } from '../../../data';
+import { PageData } from '../../../data';
 import { useInfiniteScroll } from '../../../utils/useInfiniteScroll';
-import Button from '../../../components/Button';
 import ShareModal from '../../../components/Modal/ShareModal';
+import ButtonContainer from './ButtonContainer';
 
 interface Props {
   data: PageData[];
@@ -13,29 +12,12 @@ interface Props {
 
 export default function PageList({ data }: Props) {
   const history = useHistory();
-  const [bookmarked, setBookmarked] = useState<number[]>([]);
-  const [moreIdx, setMoreIdx] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [limit, setLimit] = useState(5);
 
   const handleClickTitle = (data: PageData) => {
     history.push(`/home/pages?access=recommend$index=${data.index}&url=${data.href}`, data);
     window.scrollTo(0, 0);
-  };
-
-  // 북마크 클릭 시 상태 업데이트하여 북마크이미지 변화
-  const handleBookmark = (index: number) => {
-    if (bookmarked.indexOf(index) === -1) setBookmarked([...bookmarked, index]);
-    else {
-      const newState = bookmarked.filter((value) => value !== index);
-      setBookmarked(newState);
-    }
-  };
-
-  // ...버튼 클릭 시 index업데이트
-  const handleMore = (index: number) => {
-    if (moreIdx === -1 || moreIdx !== index) setMoreIdx(index);
-    else setMoreIdx(-1);
   };
 
   // infinite scroll
@@ -48,7 +30,6 @@ export default function PageList({ data }: Props) {
     },
     [setLimit]
   );
-
   const [setTarget] = useInfiniteScroll(onIntersect);
   const landingData = useMemo(() => data.slice(0, limit), [data, limit]);
 
@@ -82,18 +63,7 @@ export default function PageList({ data }: Props) {
                 {data.source}
               </a>
             </SOURCE_CONTAINER>
-            <BUTTON_CONTAINER>
-              <Button
-                onClick={() => handleBookmark(data.index)}
-                icon={bookmarked.indexOf(data.index) !== -1 ? 'bookmark_mint' : 'bookmark'}
-              />
-              <Button icon="share" onClick={() => setOpenModal(!openModal)} />
-              <OptionsBtn
-                showOptions={data.index === moreIdx}
-                setShowOptions={() => handleMore(data.index)}
-                optionData={pageListMoreData}
-              />
-            </BUTTON_CONTAINER>
+            <ButtonContainer dataIdx={data.index} openModal={openModal} setOpenModal={setOpenModal} />
           </FOOTER>
         </PAGE_CONTAINER>
       ))}
