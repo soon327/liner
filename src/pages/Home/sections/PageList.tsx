@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { foryouData, PageData } from '../../../data';
+import OptionsBtn from '../../../components/Button/OptionsBtn';
+import { foryouData, PageData, pageListMoreData } from '../../../data';
 import Button from '../../../components/Button';
 
 export default function PageList() {
   const history = useHistory();
+  const [bookmarked, setBookmarked] = useState<number[]>([]);
+  const [showMore, setShowMore] = useState(false);
 
   const handleClickTitle = (data: PageData) => {
     history.push(`/home/pages?access=recommend$index=${data.index}&url=${data.href}`, data);
+  };
+
+  // 북마크 클릭 시 상태 업데이트하여 북마크이미지 변화
+  const handleBookmark = (index: number) => {
+    if (bookmarked.indexOf(index) === -1) setBookmarked([...bookmarked, index]);
+    else {
+      const newState = bookmarked.filter((value) => value !== index);
+      setBookmarked(newState);
+    }
   };
 
   return (
@@ -41,7 +53,10 @@ export default function PageList() {
               </a>
             </SOURCE_CONTAINER>
             <BUTTON_CONTAINER>
-              <Button icon="bookmark" />
+              <Button
+                onClick={() => handleBookmark(data.index)}
+                icon={bookmarked.indexOf(data.index) !== -1 ? 'bookmark_mint' : 'bookmark'}
+              />
               <Button icon="share" />
               <Button icon="more" />
             </BUTTON_CONTAINER>
@@ -98,7 +113,7 @@ const CONTENTS_TITLE_CONTAINER = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-const CONTENTS_TITLE = styled.div`
+const CONTENTS_TITLE = styled.span`
   cursor: pointer;
   :hover {
     opacity: 0.8;

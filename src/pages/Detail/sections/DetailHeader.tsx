@@ -1,11 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../../components/Button';
 
 export default function DetailHeader() {
+  const history = useHistory();
+  console.log(history);
   return (
     <HEADER>
-      <Button icon="back" />
+      <Button icon="back" onClick={() => history.goBack()} />
       <BUTTON_CONTAINER>
         <Button icon="bookmark" />
         <Button icon="share" />

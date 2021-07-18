@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   showOptions: boolean;
   setShowOptions: (showOptions: boolean) => void;
-  optionData: { title: string; data: string[] };
+  optionData: { title?: string; data: string[]; btnType?: string; left: string };
 }
 
 export default function OptionsBtn({ showOptions, setShowOptions, optionData, ...props }: Props) {
@@ -12,11 +12,11 @@ export default function OptionsBtn({ showOptions, setShowOptions, optionData, ..
     <LANGUAGES_WRAP {...props}>
       <LANGUAGES_BTN onClick={() => setShowOptions(!showOptions)}>
         {props.children}
-        <LANGUAGES_ICON showOptions={showOptions} />
+        <LANGUAGES_ICON showOptions={showOptions} btnType={optionData.btnType} />
       </LANGUAGES_BTN>
-      <LANGUAGES_DROPDOWN_BOX showOptions={showOptions} title={optionData.title}>
+      <LANGUAGES_DROPDOWN_BOX showOptions={showOptions} left={optionData.left}>
         <LANGUAGES_DROPDOWN>
-          <DROPDOWN_HEADER>{optionData.title}</DROPDOWN_HEADER>
+          {optionData.title && <DROPDOWN_HEADER>{optionData.title}</DROPDOWN_HEADER>}
           {optionData.data.map((language) => (
             <LANGUAGE_LI key={language}>
               <span>{language}</span>
@@ -49,19 +49,24 @@ const LANGUAGES_BTN = styled.button`
   cursor: pointer;
 `;
 
-const LANGUAGES_ICON = styled.div<{ showOptions: boolean }>`
+const LANGUAGES_ICON = styled.div<{ showOptions: boolean; btnType: string | undefined }>`
   width: 8px;
   height: 8px;
   object-fit: contain;
   margin-left: 8px;
   background-image: url(${({ showOptions }) => (showOptions ? '/images/collapse.svg' : '/images/expand.svg')});
+  ${({ btnType }) =>
+    btnType === 'more' &&
+    css`
+      background-image: url(/images/more.svg);
+    `}
   background-size: 8px;
   background-repeat: no-repeat;
 `;
 
-const LANGUAGES_DROPDOWN_BOX = styled.div<{ showOptions: boolean; title: string }>`
+const LANGUAGES_DROPDOWN_BOX = styled.div<{ showOptions: boolean; left: string }>`
   position: relative;
-  left: ${({ title }) => (title === 'Select for feed' ? '-200px' : '-100px')};
+  left: ${({ left }) => left};
   top: -15px;
   z-index: 3 !important;
   display: ${({ showOptions }) => (showOptions ? 'bolck' : 'none')};

@@ -17,9 +17,15 @@ export interface AsideData {
   pages: Page[];
 }
 
-export const languages = { title: 'Select for feed', data: ['English', '한국어', '简体字', '繁體字', '日本語', 'Others'] };
+export const languages = { title: 'Select for feed', data: ['English', '한국어', '简体字', '繁體字', '日本語', 'Others'], left: '-200px' };
 
-export const searchOptions = { title: 'Search Option', data: ['Title', 'URL', 'Highlight', 'Description', 'Comment'] };
+export const searchOptions = { title: 'Search Option', data: ['Title', 'URL', 'Highlight', 'Description', 'Comment'], left: '-100px' };
+
+export const pageListMoreData = {
+  btnType: 'more',
+  data: ['More Pages like this', 'Fewer pages like this', 'Hide this page'],
+  left: '-100px',
+};
 
 export const trendingData: AsideData = {
   keywords: [

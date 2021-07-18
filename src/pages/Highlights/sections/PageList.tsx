@@ -23,6 +23,7 @@ export default function PageList() {
   const handleClickTitle = (data: PageData) => {
     history.push(`/myhighlights/pages?type=my_highlights$index=${data.index}&url=${data.href}`, data);
   };
+
   return (
     <section>
       {highlightsData.map((data) => (

@@ -11,6 +11,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'expand_mint'
     | 'filter'
     | 'bookmark'
+    | 'bookmark_mint'
     | 'share'
     | 'more'
     | 'export'
@@ -27,6 +28,7 @@ const iconURL = {
   expand_mint: '/images/expand_mint.svg',
   filter: '/images/filter.svg',
   bookmark: '/images/bookmark.svg',
+  bookmark_mint: '/images/bookmark_mint.svg',
   share: '/images/share.svg',
   more: '/images/more.svg',
   export: '/images/export.svg',
