@@ -9,6 +9,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   titleName: 'For You' | 'My Highlights';
 }
 
+// props.children이 tootip의 내용으로 들어간다.
+
 export default function Title({ titleName, ...props }: Props) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [showLanguages, setShowLanguages] = useState(false);

@@ -4,6 +4,7 @@ import { CONTAINER, CONTENTS, SUBTITLE } from '../Home';
 import Aside from '../../components/Aside';
 import Title from '../../components/Title';
 import ConfigurationBar from './sections/ConfigurationBar';
+import PageList from './sections/PageList';
 import { trendingData } from '../../data';
 
 export default function HighlightsPage() {
@@ -21,6 +22,7 @@ export default function HighlightsPage() {
           showOptions={showOptions}
           setShowOptions={setShowOptions}
         />
+        <PageList />
       </CONTENTS>
       <Aside data={trendingData}>Trending</Aside>
     </CONTAINER>

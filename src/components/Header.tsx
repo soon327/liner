@@ -25,6 +25,8 @@ const HEADER = styled.header`
   height: 64px;
   display: flex;
   align-items: center;
+  background-color: white;
+  z-index: 1;
 `;
 
 const LOGO_BOX = styled.div`

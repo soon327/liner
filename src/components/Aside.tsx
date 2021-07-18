@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from './Button';
-import { Data } from '../data';
+import { AsideData } from '../data';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  data: Data;
+  data: AsideData;
 }
 
 export default function Aside({ data, ...props }: Props) {

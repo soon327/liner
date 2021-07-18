@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Aside from '../../components/Aside';
 import Title from '../../components/Title';
+import PageList from './sections/PageList';
 import { trendingData } from '../../data';
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
           We recommend you pages you'll love and need. The more you highlight, the smarter our algorithm gets.
         </Title>
         <SUBTITLE>Picked by LINER, just for you</SUBTITLE>
+        <PageList />
       </CONTENTS>
       <Aside data={trendingData}>Trending</Aside>
     </CONTAINER>

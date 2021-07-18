@@ -7,6 +7,7 @@ import Header from './components/Header';
 import MenuBar from './components/MenuBar';
 import HomePage from './pages/Home';
 import HighlightsPage from './pages/Highlights';
+import DetailPage from './pages/Detail';
 
 function App(): JSX.Element {
   return (
@@ -18,9 +19,10 @@ function App(): JSX.Element {
             <Header />
             <MenuBar />
             <Switch>
-              <Route path="/home" component={HomePage} />
-              <Route path="/myhighlights/highlights" component={HighlightsPage} />
+              <Route path="/home" exact component={HomePage} />
+              <Route path="/myhighlights/highlights" exact component={HighlightsPage} />
               <Route path="/more" component={HomePage} />
+              <Route path="/:types/pages" component={DetailPage} />
               <Redirect path="*" to="/home" />
             </Switch>
           </CONTAINER>
