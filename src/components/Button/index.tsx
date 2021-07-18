@@ -2,7 +2,20 @@ import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: 'notification' | 'search' | 'close' | 'info' | 'expand' | 'expand_mint' | 'filter' | 'bookmark' | 'share' | 'more' | 'export';
+  icon?:
+    | 'notification'
+    | 'search'
+    | 'close'
+    | 'info'
+    | 'expand'
+    | 'expand_mint'
+    | 'filter'
+    | 'bookmark'
+    | 'share'
+    | 'more'
+    | 'export'
+    | 'back'
+    | 'trash';
 }
 
 const iconURL = {
@@ -18,6 +31,8 @@ const iconURL = {
   more: '/images/more.svg',
   export: '/images/export.svg',
   tag: '/images/tag.svg',
+  back: '/images/back.svg',
+  trash: '/images/back.svg',
 };
 
 export default function Button({ icon, ...props }: Props): JSX.Element {

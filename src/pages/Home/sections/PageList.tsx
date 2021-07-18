@@ -1,9 +1,16 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { foryouData } from '../../../data';
+import { foryouData, PageData } from '../../../data';
 import Button from '../../../components/Button';
 
 export default function PageList() {
+  const history = useHistory();
+
+  const handleClickTitle = (data: PageData) => {
+    history.push(`/home/pages?access=recommend$index=${data.index}&url=${data.href}`, data);
+  };
+
   return (
     <section>
       {foryouData.map((data) => (
@@ -20,7 +27,7 @@ export default function PageList() {
           <CONTENTS_CONTAINER>
             <CONTENTS>
               <CONTENTS_TITLE_CONTAINER>
-                <CONTENTS_TITLE href={`/home/pages?access=recommend$index=${data.index}&url=${data.href}`}>{data.title}</CONTENTS_TITLE>
+                <CONTENTS_TITLE onClick={() => handleClickTitle(data)}>{data.title}</CONTENTS_TITLE>
               </CONTENTS_TITLE_CONTAINER>
               <CONTENTS_DESC_CONTAINER>
                 <CONTENTS_DESC>{data.description}</CONTENTS_DESC>
@@ -91,7 +98,8 @@ const CONTENTS_TITLE_CONTAINER = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-const CONTENTS_TITLE = styled.a`
+const CONTENTS_TITLE = styled.div`
+  cursor: pointer;
   :hover {
     opacity: 0.8;
   }

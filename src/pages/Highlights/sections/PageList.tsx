@@ -1,6 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { highlightsData } from '../../../data';
+import { highlightsData, PageData } from '../../../data';
 import Button from '../../../components/Button';
 
 import {
@@ -17,6 +18,11 @@ import {
 } from '../../Home/sections/PageList';
 
 export default function PageList() {
+  const history = useHistory();
+
+  const handleClickTitle = (data: PageData) => {
+    history.push(`/myhighlights/pages?type=my_highlights$index=${data.index}&url=${data.href}`, data);
+  };
   return (
     <section>
       {highlightsData.map((data) => (
@@ -24,9 +30,7 @@ export default function PageList() {
           <CONTENTS_CONTAINER>
             <CONTENTS>
               <CONTENTS_TITLE_CONTAINER>
-                <CONTENTS_TITLE href={`/myhighlights/pages?type=my_highlights$index=${data.index}&url=${data.href}`}>
-                  {data.title}
-                </CONTENTS_TITLE>
+                <CONTENTS_TITLE onClick={() => handleClickTitle(data)}>{data.title}</CONTENTS_TITLE>
               </CONTENTS_TITLE_CONTAINER>
               <CONTENTS_DESC_CONTAINER>
                 <CONTENTS_DESC>{data.description}</CONTENTS_DESC>

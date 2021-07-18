@@ -4,13 +4,12 @@ import styled, { css } from 'styled-components';
 
 export default function MenuBar() {
   const { pathname } = useLocation();
-
   return (
     <MENU_BAR>
-      <MENU href="/home" active={pathname === '/home'}>
+      <MENU href="/home" active={pathname === '/home' || pathname === '/home/pages'}>
         For You
       </MENU>
-      <MENU href="/myhighlights/highlights" active={pathname === '/myhighlights/highlights'}>
+      <MENU href="/myhighlights/highlights" active={pathname === '/myhighlights/highlights' || pathname === '/myhighlights/pages'}>
         My Highlights
       </MENU>
       <MENU href="/more" active={pathname === '/more'}>
