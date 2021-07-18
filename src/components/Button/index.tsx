@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface BtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?:
     | 'notification'
     | 'search'
@@ -37,7 +37,7 @@ const iconURL = {
   trash: '/images/back.svg',
 };
 
-export default function Button({ icon, ...props }: Props): JSX.Element {
+export default function Button({ icon, ...props }: BtnProps): JSX.Element {
   return (
     <BUTTON icon={icon ? iconURL[icon] : null} {...props}>
       {props.children}

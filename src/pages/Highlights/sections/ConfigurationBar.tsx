@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../../../components/Button';
 import OptionsBtn from '../../../components/Button/OptionsBtn';
 import Input from '../../../components/Input';
-import Modal from '../../../components/Modal';
+import FilterModal from '../../../components/Modal/FilterModal';
 import { searchOptions } from '../../../data';
 
 interface Props {
@@ -15,15 +15,14 @@ interface Props {
 
 export default function ConfigurationBar({ clickedInput, setClickedInput, showOptions, setShowOptions }: Props) {
   const [openModal, setOpenModal] = useState(false);
-
   return (
     <>
-      <Modal openModal={openModal} setOpenModal={setOpenModal} />
+      <FilterModal openModal={openModal} setOpenModal={setOpenModal} />
       {clickedInput ? (
         <>
           <CONFIGURATION_BAR>
             <BUTTON_CONTAINER clicked={clickedInput}>
-              <SEARCH_OPTIONS optionData={searchOptions} showOptions={showOptions} setShowOptions={setShowOptions}>
+              <SEARCH_OPTIONS optionData={searchOptions} showOptions={showOptions} setShowOptions={() => setShowOptions(!showOptions)}>
                 Search Option
               </SEARCH_OPTIONS>
               <SEARCH

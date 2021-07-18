@@ -24,24 +24,11 @@ const MODAL_BACKGROUND = styled.div<{ openModal: boolean }>`
   right: 0;
   bottom: 0;
   left: 0;
+  overflow-y: hidden;
   z-index: 20;
 `;
 
 const MODAL = styled.div<{ openModal: boolean }>`
   display: ${(props) => (props.openModal ? 'flex' : 'none')};
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 25vw;
-  min-width: 30vh;
-  height: 30vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5%;
-  background-color: white;
-  z-index: 22;
-  box-shadow: 4px 4px 2px 1px rgba(0, 0, 255, 0.2);
-  overflow: hidden;
+  z-index: 99;
 `;

@@ -26,7 +26,7 @@ export default function Title({ titleName, ...props }: Props) {
           </GuideTooltip>
         </DROPDOWN_CONTAINER>
         {titleName === 'For You' && (
-          <OptionsBtn showOptions={showLanguages} setShowOptions={setShowLanguages} optionData={languages}>
+          <OptionsBtn showOptions={showLanguages} setShowOptions={() => setShowLanguages(!showLanguages)} optionData={languages}>
             Languages
           </OptionsBtn>
         )}

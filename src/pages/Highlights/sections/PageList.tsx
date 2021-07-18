@@ -2,8 +2,10 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInfiniteScroll } from '../../../utils/useInfiniteScroll';
-import { PageData } from '../../../data';
+import { PageData, highlightsShareBtnData, highlightsMoreBtnData } from '../../../data';
 import Button from '../../../components/Button';
+import ExportModal from '../../../components/Modal/ExportModal';
+import OptionsBtn from '../../../components/Button/OptionsBtn';
 
 import {
   PAGE_CONTAINER,
@@ -23,6 +25,9 @@ interface Props {
 }
 export default function PageList({ data }: Props) {
   const history = useHistory();
+  const [openModal, setOpenModal] = useState(false);
+  const [shareIdx, setShareIdx] = useState(-1);
+  const [moreIdx, setMoreIdx] = useState(-1);
   const [limit, setLimit] = useState(5);
 
   const handleClickTitle = (data: PageData) => {
@@ -30,12 +35,23 @@ export default function PageList({ data }: Props) {
     window.scrollTo(0, 0);
   };
 
+  const handleDropDown = (index: number, btnType: 'share' | 'more') => {
+    if (btnType === 'share') {
+      setMoreIdx(-1);
+      if (shareIdx === -1 || shareIdx !== index) setShareIdx(index);
+      else setShareIdx(-1);
+    } else {
+      setShareIdx(-1);
+      if (moreIdx === -1 || moreIdx !== index) setMoreIdx(index);
+      else setMoreIdx(-1);
+    }
+  };
+
   const onIntersect: IntersectionObserverCallback = useCallback(
     ([{ isIntersecting, target }], observer) => {
       if (isIntersecting) {
         setLimit((limit: number) => limit + 5);
         observer.unobserve(target);
-        console.log('dfawefefaefw');
       }
     },
     [setLimit]
@@ -46,6 +62,7 @@ export default function PageList({ data }: Props) {
 
   return (
     <section>
+      <ExportModal openModal={openModal} setOpenModal={setOpenModal} />
       {landingData.map((data) => (
         <PAGE_CONTAINER key={data.index} ref={data.index === landingData.length - 1 ? setTarget : null}>
           <CONTENTS_CONTAINER>
@@ -77,9 +94,17 @@ export default function PageList({ data }: Props) {
               </a>
             </SOURCE_CONTAINER>
             <BUTTON_CONTAINER>
-              <Button icon="share" />
-              <Button icon="export" />
-              <Button icon="more" />
+              <OptionsBtn
+                showOptions={data.index === shareIdx}
+                setShowOptions={() => handleDropDown(data.index, 'share')}
+                optionData={highlightsShareBtnData}
+              />
+              <Button icon="export" onClick={() => setOpenModal(!openModal)} />
+              <OptionsBtn
+                showOptions={data.index === moreIdx}
+                setShowOptions={() => handleDropDown(data.index, 'more')}
+                optionData={highlightsMoreBtnData}
+              />
             </BUTTON_CONTAINER>
           </FOOTER>
         </PAGE_CONTAINER>

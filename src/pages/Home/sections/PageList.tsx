@@ -2,9 +2,10 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import OptionsBtn from '../../../components/Button/OptionsBtn';
-import { PageData } from '../../../data';
+import { PageData, pageListMoreData } from '../../../data';
 import { useInfiniteScroll } from '../../../utils/useInfiniteScroll';
 import Button from '../../../components/Button';
+import ShareModal from '../../../components/Modal/ShareModal';
 
 interface Props {
   data: PageData[];
@@ -13,7 +14,8 @@ interface Props {
 export default function PageList({ data }: Props) {
   const history = useHistory();
   const [bookmarked, setBookmarked] = useState<number[]>([]);
-  const [showMore, setShowMore] = useState(false);
+  const [moreIdx, setMoreIdx] = useState(-1);
+  const [openModal, setOpenModal] = useState(false);
   const [limit, setLimit] = useState(5);
 
   const handleClickTitle = (data: PageData) => {
@@ -30,12 +32,18 @@ export default function PageList({ data }: Props) {
     }
   };
 
+  // ...버튼 클릭 시 index업데이트
+  const handleMore = (index: number) => {
+    if (moreIdx === -1 || moreIdx !== index) setMoreIdx(index);
+    else setMoreIdx(-1);
+  };
+
+  // infinite scroll
   const onIntersect: IntersectionObserverCallback = useCallback(
     ([{ isIntersecting, target }], observer) => {
       if (isIntersecting) {
         setLimit((limit: number) => limit + 5);
         observer.unobserve(target);
-        console.log('dfawefefaefw');
       }
     },
     [setLimit]
@@ -46,6 +54,7 @@ export default function PageList({ data }: Props) {
 
   return (
     <section>
+      <ShareModal openModal={openModal} setOpenModal={setOpenModal} />
       {landingData.map((data) => (
         <PAGE_CONTAINER key={data.index} ref={data.index === landingData.length - 1 ? setTarget : null}>
           {data.tagList && (
@@ -78,8 +87,12 @@ export default function PageList({ data }: Props) {
                 onClick={() => handleBookmark(data.index)}
                 icon={bookmarked.indexOf(data.index) !== -1 ? 'bookmark_mint' : 'bookmark'}
               />
-              <Button icon="share" />
-              <Button icon="more" />
+              <Button icon="share" onClick={() => setOpenModal(!openModal)} />
+              <OptionsBtn
+                showOptions={data.index === moreIdx}
+                setShowOptions={() => handleMore(data.index)}
+                optionData={pageListMoreData}
+              />
             </BUTTON_CONTAINER>
           </FOOTER>
         </PAGE_CONTAINER>

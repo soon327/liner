@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Modal, { Props } from './';
 
-export default function FilterModal({ openModal, setOpenModal }: Props) {
+export default function SharetModal({ openModal, setOpenModal }: Props) {
   return (
     <CONTAINER openModal={openModal} setOpenModal={setOpenModal}>
-      <div>필터</div>
+      <div>Share</div>
     </CONTAINER>
   );
 }

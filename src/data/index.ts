@@ -24,7 +24,19 @@ export const searchOptions = { title: 'Search Option', data: ['Title', 'URL', 'H
 export const pageListMoreData = {
   btnType: 'more',
   data: ['More Pages like this', 'Fewer pages like this', 'Hide this page'],
-  left: '-100px',
+  left: '0px',
+};
+
+export const highlightsMoreBtnData = {
+  btnType: 'more',
+  data: ['Edit a title', 'View original', 'Move to trash'],
+  left: '0px',
+};
+
+export const highlightsShareBtnData = {
+  btnType: 'share',
+  data: ['Full text with highlights', 'Highlights summary'],
+  left: '0px',
 };
 
 export const trendingData: AsideData = {
